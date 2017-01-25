@@ -1,0 +1,22 @@
+{
+  "name": "parse-tampermonkey-script",
+  "version": "1.0.0",
+  "description": "Parse tampermonkey user script",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.1.4",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tampermonkey",
+    "parse",
+    "cagatay",
+    "cali"
+  ],
+  "author": "Çağatay Çalı",
+  "license": "ISC"
+}
