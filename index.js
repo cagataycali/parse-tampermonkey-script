@@ -45,7 +45,7 @@ module.exports = function (testScript, path) {
 
     var parse = testScript.split('\n');
     var scripts = [];
-    var match, namespace;
+    var match, namespace, name;
     var end = 0;
     parse.forEach((value,key) => {
       if (value.includes('@require')) {
@@ -54,6 +54,8 @@ module.exports = function (testScript, path) {
         match = value.split('@match')[1].trim();
       } else if (value.includes('@namespace')) {
         namespace = value.split('@namespace')[1].trim();
+      } else if (value.includes('@name')) {
+        name = value.split('@name')[1].trim();
       } else if (value.includes('// ==/UserScript==')) {
         end = key + 1;
       }
@@ -76,7 +78,8 @@ module.exports = function (testScript, path) {
                 code: last,
                 scripts,
                 match,
-                namespace
+                namespace,
+                name
               }
               resolve(res);
             });
