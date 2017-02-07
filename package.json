@@ -1,6 +1,6 @@
 {
   "name": "parse-tampermonkey-script",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Parse tampermonkey user script",
   "main": "index.js",
   "dependencies": {
