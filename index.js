@@ -51,6 +51,8 @@ module.exports = function (testScript) {
         match = value.split('@match')[1].trim();
       } else if (value.includes('@namespace')) {
         namespace = value.split('@namespace')[1].trim();
+      } else if (value.includes('@enabled')) {
+        enabled = value.split('@enabled')[1].trim();
       } else if (value.includes('@name')) {
         name = value.split('@name')[1].trim();
       } else if (value.includes('// ==/UserScript==')) {
@@ -68,6 +70,7 @@ module.exports = function (testScript) {
               code: last,
               scripts,
               match,
+              enabled,
               namespace,
               name
             }
