@@ -25,8 +25,6 @@ function getScripts(urls) {
   });
 }
 
-
-
 function mergeScripts(code, externalScripts) {
   return new Promise(function(resolve, reject) {
     var tmp = "// Merged scripts.";
@@ -39,8 +37,7 @@ function mergeScripts(code, externalScripts) {
   });
 }
 
-
-module.exports = function (testScript, path) {
+module.exports = function (testScript) {
   return new Promise(function(resolve, reject) {
 
     var parse = testScript.split('\n');
@@ -67,24 +64,16 @@ module.exports = function (testScript, path) {
       .then((externalScripts) => {
         mergeScripts(parse, externalScripts)
           .then((last) => {
-            console.log(last);
-            fs.writeFile(path, last, function (err) {
-              if (err) {
-                console.log(err);
-                reject(err);
-              }
-              var res = {
-                path,
-                code: last,
-                scripts,
-                match,
-                namespace,
-                name
-              }
-              resolve(res);
-            });
+            var res = {
+              code: last,
+              scripts,
+              match,
+              namespace,
+              name
+            }
+            resolve(res);
           })
-      })
-
-  });
+          .catch((err) => {reject(err)})
+      }).catch((err) => {reject(err)})
+  })
 }
