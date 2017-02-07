@@ -53,6 +53,11 @@ module.exports = function (testScript) {
         namespace = value.split('@namespace')[1].trim();
       } else if (value.includes('@enabled')) {
         enabled = value.split('@enabled')[1].trim();
+        if (enabled === "true") {
+          enabled = true;
+        } else {
+          enabled = false;
+        }
       } else if (value.includes('@name')) {
         name = value.split('@name')[1].trim();
       } else if (value.includes('// ==/UserScript==')) {
