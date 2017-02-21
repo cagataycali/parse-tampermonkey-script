@@ -69,15 +69,19 @@ module.exports = function (testScript) {
         }
       }
     })
-    parse = parse.slice(end, parse.length)
-    parse = parse.join('\n');
+    var _parse = parse;
+    _parse = _parse.join('\n');
+    parse  = parse.slice(end, parse.length)
+    parse  = parse.join('\n');
+    // log
 
     getScripts(scripts)
       .then((externalScripts) => {
         mergeScripts(parse, externalScripts)
           .then((last) => {
             result.code = last;
-            result.require = scripts
+            result.require = scripts;
+            result.origin = _parse;
             var res = result;
             resolve(res);
           })

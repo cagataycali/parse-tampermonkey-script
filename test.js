@@ -10,8 +10,6 @@ var test = `
 // @match        https://www.google.com.tr
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.2/jquery.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.3/jquery.js
 // @cagatay cali
 // @demo content
 // @Parse all over params.
@@ -27,4 +25,7 @@ var test = `
 parse(test)
   .then((output) => {
     console.log(output);
+  })
+  .catch((err) => {
+    console.log(err);
   })
