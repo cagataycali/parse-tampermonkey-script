@@ -4,7 +4,7 @@
   "description": "Parse tampermonkey user script",
   "main": "index.js",
   "dependencies": {
-    "async": "^2.1.4",
+    "async": "^2.1.5",
     "request": "^2.79.0"
   },
   "devDependencies": {},
