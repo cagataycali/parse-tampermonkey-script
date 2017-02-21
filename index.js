@@ -44,24 +44,29 @@ module.exports = function (testScript) {
     var scripts = [];
     var match, namespace, name;
     var end = 0;
+    var result = {};
     parse.forEach((value,key) => {
-      if (value.includes('@require')) {
-        scripts.push(value.split('@require')[1].trim());
-      } else if (value.includes('@match')) {
-        match = value.split('@match')[1].trim();
-      } else if (value.includes('@namespace')) {
-        namespace = value.split('@namespace')[1].trim();
-      } else if (value.includes('@enabled')) {
-        enabled = value.split('@enabled')[1].trim();
-        if (enabled === "true") {
-          enabled = true;
-        } else {
-          enabled = false;
+      if (value.includes('@')) {
+        value = value.split('// @').join('');
+        var parsed = [];
+        value.split(' ').forEach((pair, key) => {
+          if (pair.length !== 0) {
+            parsed.push(pair);
+          }
+        })
+        // console.log(parsed);
+        var name = parsed[0];
+        if (name == 'require') {
+          scripts.push(parsed[1]);
         }
-      } else if (value.includes('@name')) {
-        name = value.split('@name')[1].trim();
-      } else if (value.includes('// ==/UserScript==')) {
-        end = key + 1;
+        parsed = parsed.slice(1, parsed.length).join(' ')
+        eval(`
+          result.${name} = "${parsed}"
+          `)
+      } else {
+        if (value.includes('// ==/UserScript==')) {
+          end = key + 1;
+        }
       }
     })
     parse = parse.slice(end, parse.length)
@@ -71,14 +76,9 @@ module.exports = function (testScript) {
       .then((externalScripts) => {
         mergeScripts(parse, externalScripts)
           .then((last) => {
-            var res = {
-              code: last,
-              scripts,
-              match,
-              enabled,
-              namespace,
-              name
-            }
+            result.code = last;
+            result.require = scripts
+            var res = result;
             resolve(res);
           })
           .catch((err) => {reject(err)})
