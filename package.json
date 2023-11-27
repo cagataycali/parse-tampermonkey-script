@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "async": "^2.1.5",
-    "request": "^2.79.0"
+    "request": "^2.80.0"
   },
   "devDependencies": {},
   "scripts": {
